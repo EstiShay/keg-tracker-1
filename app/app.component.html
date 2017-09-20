@@ -2,7 +2,7 @@
 <div class="container">
   <keg-display [childKegList]="masterKegsList" (clickSender)="editKeg($event)"></keg-display>
 
-  <form class="well form-well">
+  <!-- <form class="well form-well">
     <div class="form-group">
       <label for="name">Enter beer name:</label>
       <input class="form-control" type="text" name="name" id="name" required>
@@ -20,8 +20,10 @@
       <input class="form-control" type="number" name="alcContent" id="alcContent" required>
     </div>
     <button (click)="addKeg()" type="submit" name="button" class="btn btn-danger">Add</button>
-  </form>
+  </form> -->
 
   <edit-keg [childSelectedKeg]="selectedKeg" (doneButtonClickedSender)="finishedEditing()"></edit-keg>
+  <hr>
+  <new-keg (newKegSender)="addKeg($event)"></new-keg>
 
 </div>
