@@ -11,9 +11,10 @@ import { Keg } from './keg.model';
     </select>
 
   <ul>
-  <li *ngFor='let currentKeg of childKegList | ABV:filterByABV'>{{currentKeg.name}}
+  <li [class]="priceColor(currentKeg)" *ngFor='let currentKeg of childKegList | ABV:filterByABV'>{{currentKeg.name}}     <span id="volume">{{currentKeg.volume}}</span>
 
     <button (click)="editButtonHasBeenClicked(currentKeg)">Edit!</button>
+    <button (click)="pourButtonHasBeenClicked(currentKeg)">Pour!</button>
     </li>
   </ul>
   `
@@ -27,6 +28,20 @@ export class KegDisplayComponent {
 
   editButtonHasBeenClicked(kegToEdit: Keg) {
     this.clickSender.emit(kegToEdit);
+  }
+
+  pourButtonHasBeenClicked(kegToPour: Keg) {
+    kegToPour.volume -= 16;
+    if(kegToPour.volume <= 160){
+      alert('Running low on' + kegToPour.name);
+    }
+  }
+
+  priceColor(currentKeg: Keg){
+    if(currentKeg.price >= 8) {
+      return "bg-success";
+    }
+
   }
 
   onChange(optionFromMenu){
