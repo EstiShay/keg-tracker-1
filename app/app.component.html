@@ -1,0 +1,27 @@
+<h1>Our Kegs</h1>
+<div class="container">
+  <keg-display [childKegList]="masterKegsList" (clickSender)="editKeg($event)"></keg-display>
+
+  <form class="well form-well">
+    <div class="form-group">
+      <label for="name">Enter beer name:</label>
+      <input class="form-control" type="text" name="name" id="name" required>
+    </div>
+    <div class="form-group">
+      <label for="brand">Enter beer brand:</label>
+      <input class="form-control" type="text" name="brand" id="brand" required>
+    </div>
+    <div class="form-group">
+      <label for="price">Enter keg price:</label>
+      <input class="form-control" type="number" name="price" id="price" required>
+    </div>
+    <div class="form-group">
+      <label for="alcContent">Enter alcohol content:</label>
+      <input class="form-control" type="number" name="alcContent" id="alcContent" required>
+    </div>
+    <button (click)="addKeg()" type="submit" name="button" class="btn btn-danger">Add</button>
+  </form>
+
+  <edit-keg [childSelectedKeg]="selectedKeg" (doneButtonClickedSender)="finishedEditing()"></edit-keg>
+
+</div>

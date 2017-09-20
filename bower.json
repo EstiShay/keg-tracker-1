@@ -1,0 +1,17 @@
+{
+  "name": "js-ang-taproom",
+  "description": "Template files for setting up Angular new projects.  Updated constantly. Please consider Starring the file and use as much as you like.",
+  "main": "gulpfile.js",
+  "license": "ISC",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}
