@@ -24,9 +24,9 @@ export class AppComponent {
   selectedKeg = null;
 
   masterKegsList: Keg[] = [
-    new Keg('Shiner Bock', 'Shiner', 5, '5.8'),
-    new Keg('Modelo Negra', 'Modelo', 10, '6.6'),
-    new Keg('Miller High Life', 'Miller', 1.5, '5')
+    new Keg('Shiner Bock', 'Shiner', 5, 5.8),
+    new Keg('Modelo Negra', 'Modelo', 10, 6.6),
+    new Keg('Miller High Life', 'Miller', 1.5, 5)
   ];
 
   editKeg(clickedKeg) {
