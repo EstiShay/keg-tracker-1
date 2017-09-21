@@ -4,10 +4,15 @@ import { Keg } from './keg.model';
 @Component({
   selector: 'keg-display',
   template: `
-  <select class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (change)="onChange($event.target.value, currentKeg)">
+    <select class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (change)="onChange($event.target.value, currentKeg)">
       <option value="allKegs" selected="selected">All Kegs</option>
       <option value="strongKegs">Strong ABV Kegs</option>
       <option value="weakKegs">Weak ABV Kegs</option>
+    </select>
+
+    <select class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (change)="onChange2($event.target.value, currentKeg)">
+      <option value="allKegs" selected="selected">All Kegs</option>
+      <option value="onSaleOnly">On Sale Kegs</option>
     </select>
 
     <table class="table table-hover">
@@ -24,7 +29,7 @@ import { Keg } from './keg.model';
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor='let currentKeg of childKegList | ABV:filterByABV'>
+        <tr *ngFor='let currentKeg of childKegList | Sale:filterBySale | ABV:filterByABV'>
           <td>{{currentKeg.name}}</td>
           <td>{{currentKeg.brand}}</td>
           <td>{{currentKeg.price}}<span class="glyphicon glyphicon-asterisk" *ngIf="currentKeg.onSale===true"></span></td>
@@ -45,6 +50,7 @@ export class KegDisplayComponent {
   @Output() clickSender = new EventEmitter();
 
   filterByABV: string = "allKegs";
+  filterBySale: string = "allKegs";
 
   editButtonHasBeenClicked(kegToEdit: Keg) {
     this.clickSender.emit(kegToEdit);
@@ -78,5 +84,9 @@ export class KegDisplayComponent {
 
   onChange(optionFromMenu){
     this.filterByABV = optionFromMenu;
+  }
+
+  onChange2(optionFromMenu){
+    this.filterBySale = optionFromMenu;
   }
 }
