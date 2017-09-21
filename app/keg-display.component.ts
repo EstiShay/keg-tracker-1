@@ -1,5 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Keg } from './keg.model';
+import { Customer } from './customer.model';
 
 @Component({
   selector: 'keg-display',
@@ -37,7 +38,7 @@ import { Keg } from './keg.model';
           <td>{{currentKeg.volume}}</td>
           <td><input type="number" color="black" max="50" min="0" (change)="applyDiscount(currentKeg, $event.target.value)">%</td>
           <td><button class="btn btn-info" (click)="editButtonHasBeenClicked(currentKeg)">Edit</button></td>
-          <td><button class="btn btn-info" (click)="pintButtonHasBeenClicked(currentKeg)">Pint</button></td>
+          <td><button class="btn btn-info" (click)="pintButtonHasBeenClicked(currentKeg,selectedCustomer)">Pint</button></td>
           <td><button class="btn btn-info" (click)="growlerButtonHasBeenClicked(currentKeg)">Growler</button></td>
         </tr>
       </tbody>
@@ -46,6 +47,7 @@ import { Keg } from './keg.model';
 })
 
 export class KegDisplayComponent {
+  @Input() childSelectedCustomer: Customer;
   @Input() childKegList: Keg[];
   @Output() clickSender = new EventEmitter();
 
@@ -61,7 +63,8 @@ export class KegDisplayComponent {
     kegToDiscount.price = kegToDiscount.price * (1-(discount/100))
   }
 
-  pintButtonHasBeenClicked(kegToPour: Keg) {
+  pintButtonHasBeenClicked(kegToPour: Keg,selectedCustomer) {
+    selectedCustomer.tab += 1;
     kegToPour.volume -= 16;
     if(kegToPour.volume <= 160){
       alert('Running low on' + kegToPour.name);

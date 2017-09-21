@@ -7,6 +7,7 @@ import { EditKegComponent } from './edit-keg.component';
 import { NewKegComponent } from './new-keg.component';
 import { ABVPipe } from './ABV.pipe';
 import { SalePipe } from './SalePipe.pipe';
+import { CustomerDisplayComponent } from './customer-display.component';
 
 @NgModule({
   imports: [ BrowserModule,
@@ -16,7 +17,8 @@ import { SalePipe } from './SalePipe.pipe';
                   EditKegComponent,
                   NewKegComponent,
                   ABVPipe,
-                  SalePipe],
+                  SalePipe,
+                  CustomerDisplayComponent],
   bootstrap:    [ AppComponent ]
 })
 

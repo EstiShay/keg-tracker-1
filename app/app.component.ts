@@ -6,24 +6,13 @@ import { FormsModule } from '@angular/forms';
 
 
 @Component({
-  // moduleId: module.id,
   selector: 'app-root',
   templateUrl: 'app/app.component.html'
-  // template: `
-  // <h1>Our Kegs</h1>
-  // <div class="container">
-  //   <ul>
-  //     <li *ngFor='let myKeg of kegs'>{{myKeg.name}}</li>
-  //   </ul>
-  //
-  //
-  // </div>
-  //
-  // `
 })
 
 export class AppComponent {
   selectedKeg = null;
+  selectedCustomer = null;
 
   masterKegsList: Keg[] = [
     new Keg('Shiner Bock', 'Shiner', 5, 5.8),
@@ -31,7 +20,12 @@ export class AppComponent {
     new Keg('Miller High Life', 'Miller', 1.5, 5)
   ];
 
+  masterCustomerList: Customer[] = [
+    new Customer('Trevor Gill', 10, [])
+  ];
+
   editKeg(clickedKeg) {
+    console.log(clickedKeg);
     this.selectedKeg = clickedKeg;
   }
 
@@ -41,6 +35,11 @@ export class AppComponent {
 
   addKeg(newKegFromChild: Keg) {
     this.masterKegsList.push(newKegFromChild);
+  }
+
+  editCustomer(clickedCustomer){
+    console.log(clickedCustomer);
+    this.selectedCustomer = clickedCustomer;
   }
 
 }
