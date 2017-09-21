@@ -11,6 +11,11 @@ input {
   color: black;
 }
 
+.glyphicon {
+    font-size: 24px;
+    color: gold;
+}
+
 /*body {
   background: url("../../resources/images/patrick-fore-362583.jpg");
   background-size: cover;

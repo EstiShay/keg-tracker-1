@@ -27,10 +27,10 @@ import { Keg } from './keg.model';
         <tr *ngFor='let currentKeg of childKegList | ABV:filterByABV'>
           <td>{{currentKeg.name}}</td>
           <td>{{currentKeg.brand}}</td>
-          <td>{{currentKeg.price}}</td>
+          <td>{{currentKeg.price}}<span class="glyphicon glyphicon-asterisk" *ngIf="currentKeg.onSale===true"></span></td>
           <td>{{currentKeg.alcoholContent}}</td>
           <td>{{currentKeg.volume}}</td>
-          <td><input type="number" color="black" max="30" min="0" (change)="applyDiscount(currentKeg, $event.target.value)">%</td>
+          <td><input type="number" color="black" max="50" min="0" (change)="applyDiscount(currentKeg, $event.target.value)">%</td>
           <td><button class="btn btn-info" (click)="editButtonHasBeenClicked(currentKeg)">Edit</button></td>
           <td><button class="btn btn-info" (click)="pintButtonHasBeenClicked(currentKeg)">Pint</button></td>
           <td><button class="btn btn-info" (click)="growlerButtonHasBeenClicked(currentKeg)">Growler</button></td>
@@ -51,7 +51,8 @@ export class KegDisplayComponent {
   }
 
   applyDiscount(kegToDiscount: Keg, discount){
-    kegToDiscount.price = (kegToDiscount.price * (1-(discount/100))
+    kegToDiscount.onSale = true;
+    kegToDiscount.price = kegToDiscount.price * (1-(discount/100))
   }
 
   pintButtonHasBeenClicked(kegToPour: Keg) {
