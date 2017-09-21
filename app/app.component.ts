@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Keg } from './keg.model';
+import { SaleRecord } from './saleRecord.model';
+import { Customer } from './customer.model';
 import { FormsModule } from '@angular/forms';
 
 
@@ -26,7 +28,7 @@ export class AppComponent {
   masterKegsList: Keg[] = [
     new Keg('Shiner Bock', 'Shiner', 5, 5.8),
     new Keg('Modelo Negra', 'Modelo', 10, 6.6),
-    new Keg('Miller High Life', 'Miller', 1.5, 5) 
+    new Keg('Miller High Life', 'Miller', 1.5, 5)
   ];
 
   editKeg(clickedKeg) {

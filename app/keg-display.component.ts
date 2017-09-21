@@ -33,7 +33,7 @@ import { Keg } from './keg.model';
           <td>{{currentKeg.name}}</td>
           <td>{{currentKeg.brand}}</td>
           <td>{{currentKeg.price}}<span class="glyphicon glyphicon-asterisk" *ngIf="currentKeg.onSale===true"></span></td>
-          <td>{{currentKeg.alcoholContent}}</td>
+          <td>{{currentKeg.alcoholContent}}%</td>
           <td>{{currentKeg.volume}}</td>
           <td><input type="number" color="black" max="50" min="0" (change)="applyDiscount(currentKeg, $event.target.value)">%</td>
           <td><button class="btn btn-info" (click)="editButtonHasBeenClicked(currentKeg)">Edit</button></td>
