@@ -10,13 +10,33 @@ import { Keg } from './keg.model';
       <option value="weakKegs">Weak ABV Kegs</option>
     </select>
 
-  <ul>
-  <li [class]="priceColor(currentKeg)" *ngFor='let currentKeg of childKegList | ABV:filterByABV'>{{currentKeg.name}}     <span id="volume">{{currentKeg.volume}}</span>
+    <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Brand</th>
+        <th>Price</th>
+        <th>Alcohol Content</th>
+      </tr>
+    </thead>
+    <tbody>
+
+
+
+  <tr *ngFor='let currentKeg of childKegList | ABV:filterByABV'>
+  <td>{{currentKeg.name}}</td>
+  <td>{{currentKeg.brand}}</td>
+  <td>{{currentKeg.price}}</td>
+  <td>{{currentKeg.alcoholContent}}</td>
+  </tr>
+
+
+  </tbody>
+  </table>
 
     <button (click)="editButtonHasBeenClicked(currentKeg)">Edit!</button>
     <button (click)="pourButtonHasBeenClicked(currentKeg)">Pour!</button>
-    </li>
-  </ul>
+
   `
 })
 

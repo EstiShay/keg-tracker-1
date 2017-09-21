@@ -1,13 +1,11 @@
-<h1>Our Kegs</h1>
+
 <div class="container">
+  <h1>Trev's Kegs</h1>
+
+  <new-keg (newKegSender)="addKeg($event)"></new-keg><br><hr>
 
   <keg-display [childKegList]="masterKegsList" (clickSender)="editKeg($event)"></keg-display>
 
-
   <edit-keg [childSelectedKeg]="selectedKeg" (doneButtonClickedSender)="finishedEditing()"></edit-keg>
-
-  <hr>
-
-  <new-keg (newKegSender)="addKeg($event)"></new-keg>
 
 </div>
