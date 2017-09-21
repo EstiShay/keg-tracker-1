@@ -4,39 +4,39 @@ import { Keg } from './keg.model';
 @Component({
   selector: 'keg-display',
   template: `
-  <select (change)="onChange($event.target.value)">
+  <select class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" (change)="onChange($event.target.value, currentKeg)">
       <option value="allKegs" selected="selected">All Kegs</option>
       <option value="strongKegs">Strong ABV Kegs</option>
       <option value="weakKegs">Weak ABV Kegs</option>
     </select>
 
     <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Brand</th>
-        <th>Price</th>
-        <th>Alcohol Content</th>
-      </tr>
-    </thead>
-    <tbody>
-
-
-
-  <tr *ngFor='let currentKeg of childKegList | ABV:filterByABV'>
-  <td>{{currentKeg.name}}</td>
-  <td>{{currentKeg.brand}}</td>
-  <td>{{currentKeg.price}}</td>
-  <td>{{currentKeg.alcoholContent}}</td>
-  </tr>
-
-
-  </tbody>
-  </table>
-
-    <button (click)="editButtonHasBeenClicked(currentKeg)">Edit!</button>
-    <button (click)="pourButtonHasBeenClicked(currentKeg)">Pour!</button>
-
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Brand</th>
+          <th>Price/Pint</th>
+          <th>Alcohol Content</th>
+          <th>Oz Remaining</th>
+          <th>Discount</th>
+          <th>Edit Details</th>
+          <th colspan="2">Pour</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor='let currentKeg of childKegList | ABV:filterByABV'>
+          <td>{{currentKeg.name}}</td>
+          <td>{{currentKeg.brand}}</td>
+          <td>{{currentKeg.price}}</td>
+          <td>{{currentKeg.alcoholContent}}</td>
+          <td>{{currentKeg.volume}}</td>
+          <td><input type="number" color="black" max="30" min="0" (change)="applyDiscount(currentKeg, $event.target.value)">%</td>
+          <td><button class="btn btn-info" (click)="editButtonHasBeenClicked(currentKeg)">Edit</button></td>
+          <td><button class="btn btn-info" (click)="pintButtonHasBeenClicked(currentKeg)">Pint</button></td>
+          <td><button class="btn btn-info" (click)="growlerButtonHasBeenClicked(currentKeg)">Growler</button></td>
+        </tr>
+      </tbody>
+    </table>
   `
 })
 
@@ -50,8 +50,19 @@ export class KegDisplayComponent {
     this.clickSender.emit(kegToEdit);
   }
 
-  pourButtonHasBeenClicked(kegToPour: Keg) {
+  applyDiscount(kegToDiscount: Keg, discount){
+    kegToDiscount.price = (kegToDiscount.price * (1-(discount/100))
+  }
+
+  pintButtonHasBeenClicked(kegToPour: Keg) {
     kegToPour.volume -= 16;
+    if(kegToPour.volume <= 160){
+      alert('Running low on' + kegToPour.name);
+    }
+  }
+
+  growlerButtonHasBeenClicked(kegToPour: Keg) {
+    kegToPour.volume -= 64;
     if(kegToPour.volume <= 160){
       alert('Running low on' + kegToPour.name);
     }

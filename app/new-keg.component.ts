@@ -4,7 +4,7 @@ import { Keg } from './keg.model';
 @Component({
   selector: 'new-keg',
   template: `
-  <button (click)="newKegForm = true">New Keg</button>
+  <button class="btn btn-info" (click)="newKegForm = true">New Keg</button>
     <div *ngIf="newKegForm === true">
       <h1>New Keg</h1>
       <label>Enter Keg name:</label>
@@ -15,7 +15,7 @@ import { Keg } from './keg.model';
       <input #newPrice required><br>
       <label>Enter Keg alcohol content:</label>
       <input #newAlContent required><br>
-      <button (click)="submitForm(newName.value,newBrand.value,newPrice.value,newAlContent.value); newName.value = ''; newBrand.value = ''; newPrice.value = ''; newAlContent.value = ''; newKegForm = false">Add</button>
+      <button class="btn btn-info" (click)="submitForm(newName.value,newBrand.value,newPrice.value,newAlContent.value); newName.value = ''; newBrand.value = ''; newPrice.value = ''; newAlContent.value = ''; newKegForm = false">Add</button>
     </div>
   `
 })

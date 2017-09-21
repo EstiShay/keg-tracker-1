@@ -16,7 +16,7 @@ import { Keg } from './keg.model';
           <input [(ngModel)]="childSelectedKeg.price"><br>
           <label>Enter Keg alcohol content:</label>
           <input [(ngModel)]="childSelectedKeg.alcoholContent"><br>
-          <button (click)="doneButtonClicked()">Done</button>
+          <button class="btn btn-info" (click)="doneButtonClicked()">Done</button>
         </div>
       </div>
   `

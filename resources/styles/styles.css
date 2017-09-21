@@ -1,0 +1,19 @@
+body {
+  background: #062f70;
+  color: white;
+}
+
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+  background-color: #96b6ea;
+}
+
+input {
+  color: black;
+}
+
+/*body {
+  background: url("../../resources/images/patrick-fore-362583.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}*/
