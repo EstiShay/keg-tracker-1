@@ -38,7 +38,7 @@ import { Customer } from './customer.model';
           <td>{{currentKeg.volume}}</td>
           <td><input type="number" color="black" max="50" min="0" (change)="applyDiscount(currentKeg, $event.target.value)">%</td>
           <td><button class="btn btn-info" (click)="editButtonHasBeenClicked(currentKeg)">Edit</button></td>
-          <td><button class="btn btn-info" (click)="pintButtonHasBeenClicked(currentKeg,selectedCustomer)">Pint</button></td>
+          <td><button class="btn btn-info" (click)="pintButtonHasBeenClicked(currentKeg)">Pint</button></td>
           <td><button class="btn btn-info" (click)="growlerButtonHasBeenClicked(currentKeg)">Growler</button></td>
         </tr>
       </tbody>
@@ -50,9 +50,19 @@ export class KegDisplayComponent {
   @Input() childSelectedCustomer: Customer;
   @Input() childKegList: Keg[];
   @Output() clickSender = new EventEmitter();
+  @Output() sendMyKegUpThereYoPint = new EventEmitter();
+  @Output() sendMyKegUpThereYoGrowler = new EventEmitter();
 
   filterByABV: string = "allKegs";
   filterBySale: string = "allKegs";
+
+  pintButtonHasBeenClicked(activeKeg: Keg) {
+    this.sendMyKegUpThereYoPint.emit(activeKeg);
+  }
+
+  growlerButtonHasBeenClicked(activeKeg: Keg) {
+    this.sendMyKegUpThereYoGrowler.emit(activeKeg);
+  }
 
   editButtonHasBeenClicked(kegToEdit: Keg) {
     this.clickSender.emit(kegToEdit);
@@ -63,20 +73,20 @@ export class KegDisplayComponent {
     kegToDiscount.price = kegToDiscount.price * (1-(discount/100))
   }
 
-  pintButtonHasBeenClicked(kegToPour: Keg,selectedCustomer) {
-    selectedCustomer.tab += 1;
-    kegToPour.volume -= 16;
-    if(kegToPour.volume <= 160){
-      alert('Running low on' + kegToPour.name);
-    }
-  }
-
-  growlerButtonHasBeenClicked(kegToPour: Keg) {
-    kegToPour.volume -= 64;
-    if(kegToPour.volume <= 160){
-      alert('Running low on' + kegToPour.name);
-    }
-  }
+  // pintButtonHasBeenClicked(kegToPour: Keg,childSelectedCustomer) {
+  //   childSelectedCustomer.tab += 1;
+  //   kegToPour.volume -= 16;
+  //   if(kegToPour.volume <= 160){
+  //     alert('Running low on' + kegToPour.name);
+  //   }
+  // }
+  //
+  // growlerButtonHasBeenClicked(kegToPour: Keg) {
+  //   kegToPour.volume -= 64;
+  //   if(kegToPour.volume <= 160){
+  //     alert('Running low on' + kegToPour.name);
+  //   }
+  // }
 
   priceColor(currentKeg: Keg){
     if(currentKeg.price >= 8) {

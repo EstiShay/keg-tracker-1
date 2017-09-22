@@ -13,6 +13,7 @@ import { FormsModule } from '@angular/forms';
 export class AppComponent {
   selectedKeg = null;
   selectedCustomer = null;
+  activeKeg = null;
 
   masterKegsList: Keg[] = [
     new Keg('Shiner Bock', 'Shiner', 5, 5.8),
@@ -23,6 +24,39 @@ export class AppComponent {
   masterCustomerList: Customer[] = [
     new Customer('Trevor Gill', 10, [])
   ];
+
+  pourThisLadAPint(passedKeg: Keg) {
+    this.activeKeg = passedKeg;
+    this.selectedCustomer.tab += this.activeKeg.price;
+    this.activeKeg.volume -= 16;
+    if(this.activeKeg.volume <= 160){
+      alert('Running low on' + this.activeKeg.name);
+    }
+  }
+
+  pourThisLadAGrowler(passedKeg: Keg) {
+    this.activeKeg = passedKeg;
+    this.selectedCustomer.tab += (this.activeKeg.price * 4) ;
+    this.activeKeg.volume -= 16;
+    if(this.activeKeg.volume <= 160){
+      alert('Running low on' + this.activeKeg.name);
+    }
+  }
+
+  // pintButtonHasBeenClicked(kegToPour: Keg,childSelectedCustomer) {
+  //   childSelectedCustomer.tab += 1;
+  //   kegToPour.volume -= 16;
+  //   if(kegToPour.volume <= 160){
+  //     alert('Running low on' + kegToPour.name);
+  //   }
+  // }
+
+  // growlerButtonHasBeenClicked(kegToPour: Keg) {
+  //   kegToPour.volume -= 64;
+  //   if(kegToPour.volume <= 160){
+  //     alert('Running low on' + kegToPour.name);
+  //   }
+  // }
 
   editKeg(clickedKeg) {
     console.log(clickedKeg);
@@ -38,8 +72,8 @@ export class AppComponent {
   }
 
   editCustomer(clickedCustomer){
-    console.log(clickedCustomer);
     this.selectedCustomer = clickedCustomer;
+    console.log(this.selectedCustomer);
   }
 
 }
